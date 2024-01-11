@@ -1,5 +1,7 @@
 import {useForm} from 'react-hook-form'
+import { ChakraProvider, Flex } from '@chakra-ui/react';
 
+import './style.css'
 
 export default function Register() {
 
@@ -18,6 +20,12 @@ export default function Register() {
   return (
     <div>
       <form onSubmit={onSubmit} > 
+      <Flex
+      direction='column'
+      alignItems='center'
+      
+      >
+      
         <label htmlFor='name'> Name: </label>
           <input 
             type='text' 
@@ -37,7 +45,9 @@ export default function Register() {
             })}
            />
           {errors.name && <span>{errors.name.message}</span>}
-          
+          <Flex
+          mb={2}
+          />
 
         <label htmlFor='email'> Email: </label>
           <input 
@@ -54,6 +64,9 @@ export default function Register() {
             })}
            />
            {errors.email && <span>{errors.email.message}</span> }
+           <Flex
+          mb={2}
+          />
         <label htmlFor='password'> Password: </label>
           <input 
             type='password'
@@ -73,10 +86,13 @@ export default function Register() {
             })}
            />
            {errors.password && <span>{errors.password.message}</span>}
+           <Flex
+          mb={2}
+          />
         <label htmlFor='confirmPassword'> Confirm Password: </label>
           <input 
             type='password'
-            {...register('confirmPasword', {
+            {...register('confirmPassword', {
               required: {
                 value: true,
                 message: 'This field is required'
@@ -91,49 +107,66 @@ export default function Register() {
             })}
            />
            {errors.confirmPasword && <span>{errors.confirmPasword.message}</span> }
-        <label htmlFor='dateAge'> Age: </label>
+           <Flex
+          mb={2}
+          />
+        <label htmlFor='dateBorn'> Age: </label>
           <input 
             type='date'
-            {...register('date', {
+            {...register('dateBorn', {
               required: {
                 value: true,
                 message: 'This field is required' 
               },
               validate: (value) => {
 
-                const dateAge = new Date(value)
+                const dateBorn = new Date(value)
                 const currentDateAge = new Date()
 
-               const ageInYear = currentDateAge.getFullYear() - dateAge.getFullYear()
-                console.log(ageInYear)
+               const ageInYear = currentDateAge.getFullYear() - dateBorn.getFullYear()
+               console.log(ageInYear)
 
-                return ageInYear >= 18 || { message: `You don't meet the required age. Age: ${ageInYear}` };
+              return ageInYear >= 17 || 'You dont meet the required age.' ;
               }
             })}
            />
-           {errors.date && <span>{errors.date.message}</span>}
+           {errors.date && <span>{errors.dateBorn.message}console.log(ageInYear())</span>}
+           <Flex
+          mb={2}
+          />
         <label htmlFor='country'> Choose The Country: </label>
         <select
-          {...register('countrys')}
+          {...register('countries')}
         >
           <option value='cl'>Colombia</option>
           <option value='mx'>Mexico</option>
           <option value='us'>United States</option>
         </select>
+        <Flex
+          mb={2}
+          />
         <label htmlFor='photo'> Photo: </label>
           <input 
             type='file'
             {...register('photo')}
            />
+           <Flex
+          mb={2}
+          />
         <label htmlFor='terms&Conditions'> terms & conditions: </label>
           <input 
             type='checkbox' 
-            {...register('terms&Conditions')}
+            {...register('terms&Conditions',{
+              required: true
+            })}
           />
-
+          <Flex
+          mb={5}
+          />
         <button>
           Send
         </button>
+      </Flex>
       </form>
     </div>
   )

@@ -102,7 +102,7 @@ export default function TaskList() {
                 </>
                ) : (
                 <>
-                <h4>{item.title}</h4> <i class="ri-contract-right-line"></i> {item.description}
+                <h4>{item.title}</h4> <i className="ri-contract-right-line"></i> {item.description}
 
                 <button onClick={() => toggleCompletion(index)}>
                   {item.completed ? <i className="ri-close-line"></i> : <i className="ri-check-line"></i>}
